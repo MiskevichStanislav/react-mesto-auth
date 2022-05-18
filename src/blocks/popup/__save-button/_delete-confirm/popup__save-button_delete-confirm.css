@@ -1,0 +1,9 @@
+.popup__save-button_delete-confirm {
+
+  @media screen and (max-width: 550px) {
+
+    .popup__save-button_delete-confirm {
+       margin: 15px 0 0;
+    }
+ }
+}

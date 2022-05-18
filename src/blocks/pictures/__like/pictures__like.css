@@ -1,0 +1,16 @@
+.pictures__like {
+	background-image: url(../../../images/like-disabled.svg);
+	margin:  0;
+	min-width: 22px;
+	height: 19px;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	transition: all .3s ease;
+}
+
+.pictures__like:hover {
+	opacity: 0.5;
+}

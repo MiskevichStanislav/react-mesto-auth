@@ -1,0 +1,16 @@
+.profile__id {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+@media (min-width: 320px) and (max-width: 768px) {
+  .profile__id {
+    min-width: 100%;
+    flex-direction: column;
+    margin-bottom: 36px;
+  }
+}
