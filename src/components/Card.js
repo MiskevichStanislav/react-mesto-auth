@@ -2,66 +2,58 @@ import React from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 
-function Card ({ card, onCardClick, onCardLike, onCardDelete }) {
-  
+function Card({ card, onCardClick, onCardLike, onCardDelete }) {
+
   const handleClick = () => {
     onCardClick(card);
   };
 
   const handleLikeClick = () => {
-  
+
     onCardLike(card);
   };
 
   const handleDeleteClick = () => {
     onCardDelete(card);
   };
-  
+
   const currentUser = React.useContext(CurrentUserContext);
   const isOwn = card.owner._id === currentUser._id;
 
-  
-  const cardDeleteButtonClassName = `pictures__delete ${
-    isOwn ? "" : "pictures__delete_hidden"
-  }`;
-
-
-
-  
   const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
-  
-  const cardLikeButtonClassName = `pictures__like ${
-    isLiked && "pictures__like_active"
-  }`;
+
+  const cardLikeButtonClassName = `pictures__like ${isLiked && "pictures__like_active"}`;
 
   return (
 
     <li className="pictures__item">
-        <button 
+      <button
         onClick={handleDeleteClick}
-        className={cardDeleteButtonClassName}
-        type="button" 
+        className='pictures__delete'
+        style={isOwn ? { visibility: "visible" } : { visibility: "hidden" }}
+        type="button"
         aria-label="удалить">
 
-        </button>
+      </button>
 
-        <img className="pictures__images" 
-        alt={card.name} 
-        src={card.link} 
+      <img className="pictures__images"
+        alt={card.name}
+        src={card.link}
         onClick={handleClick}
-        />
-        <div className="pictures__description">
-            <h2 className="pictures__title">{card.name}</h2>
-            <div className="pictures__like-box">
-            <button
+      />
+      <div className="pictures__description">
+        <h2 className="pictures__title">{card.name}</h2>
+        <div className="pictures__like-box">
+          <button
             onClick={handleLikeClick}
             className={cardLikeButtonClassName}
             type="button"
-          ></button>
-                <span className="pictures__like-count">{card.likes.length}</span>
-                </div>
+          >
+          </button>
+          <span className="pictures__like-count">{card.likes.length}</span>
         </div>
+      </div>
     </li>
 
   );
