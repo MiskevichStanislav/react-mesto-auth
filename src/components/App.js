@@ -58,6 +58,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setInfoPopupOpen(false);
     setInfoLoginPopupOpen(false);
     setSelectedCard({ ...selectedCard, isOpened: false });
   }
@@ -158,7 +159,7 @@ function App() {
         history.push('/sign-in');
       })
       .catch((err) => {
-        console.log(err);
+        console.log(`Ошибка регитрации: ${err}`);
         setInfoPopupOpen(false);
         setIsReg(false);
       });
@@ -172,11 +173,10 @@ function App() {
         handleLogin();
         history.push('/');
       })
-      // .catch((err) => {
-      //   setInfoLoginPopupOpen(true);
-      //   console.log(err)
-      // });
-      .catch((err) => console.log(`Ошибка ${err}`))
+      
+      .catch((err) => {
+        setInfoLoginPopupOpen(true);
+        console.log(`Ошибка входа ${err}`)})
       .finally(() => {});
       
   }
