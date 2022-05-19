@@ -12,3 +12,12 @@
 .header__exit:hover {
     opacity: 0.85;
   }
+
+  @media screen and (max-width: 767px){
+    .header__exit {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 1.22;
+    }
+    }

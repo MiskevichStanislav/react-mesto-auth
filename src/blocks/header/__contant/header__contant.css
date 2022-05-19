@@ -1,3 +1,10 @@
 .header__contant {
 display: flex;
 }
+@media screen and (max-width: 767px){
+.header__contant {
+flex-wrap: wrap;
+justify-content: center;
+
+}
+}
