@@ -23,7 +23,7 @@ __________
 
 ### Инструкция по установке:
 
-* git clone https://github.com/ilya-120/react-mesto-auth
+* git clone https://github.com/miskevichstanislav/react-mesto-auth
 * cd react-mesto-auth
 * npm install
 * npm build — собирает проект
