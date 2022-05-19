@@ -9,3 +9,6 @@
     padding: 0;
     text-decoration: none;
 }
+.header__exit:hover {
+    opacity: 0.85;
+  }

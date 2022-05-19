@@ -70,9 +70,8 @@ function App() {
           setCurrentUser(userData);
           setCards(cardData);
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => console.log(`Ошибка ${err}`))
+        .finally(() => {});
     }
   }, [loggedIn]);
 
@@ -173,10 +172,13 @@ function App() {
         handleLogin();
         history.push('/');
       })
-      .catch((err) => {
-        setInfoLoginPopupOpen(true);
-        console.log(err)
-      });
+      // .catch((err) => {
+      //   setInfoLoginPopupOpen(true);
+      //   console.log(err)
+      // });
+      .catch((err) => console.log(`Ошибка ${err}`))
+      .finally(() => {});
+      
   }
 
   function handleExit() {
@@ -249,7 +251,7 @@ function App() {
           errText='Что-то пошло не так! Попробуйте ещё раз.'
            />
           {loggedIn && <Footer />}
-          
+
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
