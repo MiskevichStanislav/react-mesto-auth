@@ -23,23 +23,5 @@ function InfoTooltip({ isOPen, onClose, isReg, okText, errText }) {
     )
 }
 
-// function InfoTooltip({ isOPen, onClose, isReg, okText, errText  }) {
-//     return (
-//       <Popup isOpen={isOpen} name={name} onClose={onClose}>
-//           <img
-//             src={isReg ? ok : error}
-//             alt={
-//                'Регистрация прошла успешно' : 'Регистрация не прошла'
-//             }
-//             className="popup__info-icon"
-//           />
-//           <h3 className="popup__signup-title">
-//             {isSuccess
-//               ? 'Вы успешно зарегистрировались!'
-//               : 'Что-то пошло не так! Попробуйте ещё раз.'}
-//           </h3>
-//        </Popup>
-//     );
-//   };
 
 export default InfoTooltip;
