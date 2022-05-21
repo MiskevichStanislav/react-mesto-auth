@@ -50,7 +50,7 @@ function Register(props) {
                     maxLength="10" />
                 <span className="popup__text-error password-input-error"></span>
                 <button type="submit" onSubmit={handleSubmit} className="authorization__button">Зарегистрироваться</button>
-                <p className='authorization__text'>Уже зарегистрированы?<Link className="authorization__text" to="/sign-in">Войти</Link></p>
+                <p className='authorization__text'>Уже зарегистрированы?<Link className="authorization__text" to="/sign-in"> Войти</Link></p>
             </form>
         </div>
     )
