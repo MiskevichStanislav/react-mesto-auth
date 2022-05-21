@@ -2,7 +2,7 @@ import React from "react";
 
 import PopupWithForm from "./PopupWithForm";
 
-function ConfirmDeletePopup({ isOpen, isConfirm, card, onClose }) {
+function ConfirmDeletePopup({ isOpen, isConfirm, card }) {
   function handleSubmit(event) {
     event.preventDefault();
     isConfirm(card);
@@ -14,7 +14,6 @@ function ConfirmDeletePopup({ isOpen, isConfirm, card, onClose }) {
           id="popup__form popup__form_add"
           formName="formDelete"
           buttonText="Да"
-          onClose={onClose}
           isOpen={isOpen}
           onSubmit={handleSubmit}
         >

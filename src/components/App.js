@@ -14,19 +14,16 @@ import Register from './Register';
 import ProtectedRoute from './ProtectedRoute';
 import * as auth from '../utils/auth.js';
 import InfoTooltip from './InfoTooltip';
-import InfoTooltipLogin from './InfoTooltipLogin';
 import ConfirmDeletePopup from './ConfirmDeletePopup';
 
 
 function App() {
-
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] = useState(false);
   const [isDeleteCard, setIsDeleteCard] = useState({});
   const [isInfoPopupOpen, setInfoPopupOpen] = useState(false);
-  const [isInfoLoginPopupOpen, setInfoLoginPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
@@ -63,13 +60,44 @@ function App() {
     setIsDeleteCard(card);
     handleDeleteCardClick();
   };
+  const isOpen =
+    isEditAvatarPopupOpen ||
+    isEditProfilePopupOpen ||
+    isAddPlacePopupOpen ||
+    selectedCard ||
+    isInfoPopupOpen ||
+    isConfirmDeletePopupOpen;
+
+  useEffect(() => {
+    function closeByEscape(event) {
+      if (event.key === 'Escape') {
+        closeAllPopups();
+      }
+    }
+    if (isOpen) {
+      document.addEventListener('keydown', closeByEscape);
+      return () => {
+        document.removeEventListener('keydown', closeByEscape);
+      }
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    function handleOverley(event) {
+      if (event.target.classList.contains('popup_open') || event.target.classList.contains('popup__close')) {
+        closeAllPopups();
+      }
+    };
+    document.addEventListener("mousedown", handleOverley);
+    return () => document.removeEventListener("mousedown", handleOverley);
+  }, [isOpen]);
 
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setInfoPopupOpen(false);
-    setInfoLoginPopupOpen(false);
     setIsConfirmDeletePopupOpen(false);
     setSelectedCard({ ...selectedCard, isOpened: false });
   }
@@ -143,23 +171,30 @@ function App() {
       .catch((err) => console.log(`Ошибка ${err}`))
       .finally(() => { });
   };
-
   function handleLogin() {
     setLoggedIn(true);
   }
+  
 
   function handleRegistrSubmit(email, password) {
-    auth.register(email, password)
-      .then((data) => {
-        setInfoPopupOpen(true);
-        setIsReg(true);
-        history.push('/sign-in');
+    auth
+      .register(email, password)
+      .then((res) => {
+        if (res) {
+          setInfoPopupOpen(true);
+          setIsReg(true);
+          history.push('/sign-in');
+        } else {
+          setInfoPopupOpen(true);
+          setIsReg(false);
+          console.log('else')
+        }
       })
       .catch((err) => {
-        console.log(`Ошибка регитрации: ${err}`);
-        setInfoPopupOpen(false);
+        setInfoPopupOpen(true);
+        console.log(`Ошибка входа ${err}`)
         setIsReg(false);
-      });
+      })
   }
 
   function handleLoginSubmit(email, password) {
@@ -170,10 +205,10 @@ function App() {
         handleLogin();
         history.push('/');
       })
-
       .catch((err) => {
-        setInfoLoginPopupOpen(true);
+        setInfoPopupOpen(true);
         console.log(`Ошибка входа ${err}`)
+        setIsReg(false);
       })
       .finally(() => { });
 
@@ -233,41 +268,29 @@ function App() {
 
         <InfoTooltip
           isOPen={isInfoPopupOpen}
-          onClose={closeAllPopups}
           isReg={isReg}
-          okText='Вы успешно зарегистрировались!'
-          errText='Что-то пошло не так! Попробуйте ещё раз.'
         />
 
-        <InfoTooltipLogin
-          isOPen={isInfoLoginPopupOpen}
-          onClose={closeAllPopups}
-          isLog={loggedIn}
-          errText='Что-то пошло не так! Попробуйте ещё раз.'
-        />
         {loggedIn && <Footer />}
 
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser} />
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
           onUpdateAvatar={handleEditAvatar}
         />
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
         />
         <ConfirmDeletePopup
           isOpen={isConfirmDeletePopupOpen}
           card={isDeleteCard}
           isConfirm={handleCardDelete}
-          onClose={closeAllPopups}
         />
-        <ImagePopup selectedCard={selectedCard} onClose={closeAllPopups} />
+        <ImagePopup selectedCard={selectedCard}
+        />
       </CurrentUserContext.Provider>
     </div>
   );

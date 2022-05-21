@@ -26,9 +26,9 @@ function Register(props) {
     return (
         <div className="authorization">
             <p className="authorization__entry">Регистрация</p>
-            <form onSubmit={handleSubmit} className="authorization__form">
+            <form onSubmit={handleSubmit} className="authorization__form" noValidate>
                 <input
-                    type="text"
+                    type="email"
                     name="email"
                     placeholder="Email"
                     className="popup__text popup__text_type_authorization popup__text_type_email"
@@ -45,7 +45,9 @@ function Register(props) {
                     required
                     id="password-input"
                     value={password}
-                    onChange={handleChangePassword} />
+                    onChange={handleChangePassword}
+                    minLength="6"
+                    maxLength="10" />
                 <span className="popup__text-error password-input-error"></span>
                 <button type="submit" onSubmit={handleSubmit} className="authorization__button">Зарегистрироваться</button>
                 <Link className="authorization__text" to="/sign-in">Уже зарегистрированы? Войти</Link>
