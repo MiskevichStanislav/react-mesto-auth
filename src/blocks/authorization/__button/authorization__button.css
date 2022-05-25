@@ -15,8 +15,18 @@
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
+    border-radius: 2px;
+    transition: .8s;
 }
 
 .authorization__button:hover {
     opacity: 0.6;
 } 
+
+@media screen and (max-width: 420px) {
+    .authorization__button {
+        margin: 40px auto 0;
+        width: 260px;
+        font-size: 16px;
+    }
+    }

@@ -4,7 +4,7 @@
     min-height: 282px;
     object-fit: cover;
     cursor: pointer;
-    background: no-repeat rgba(216, 212, 212, 0.574) url(../../../images/noimage.png);
+    background: no-repeat rgba(179, 179, 182, 0.574) url(../../../images/noimage.png);
     background-position: center center;
     background-size: 150px;
 }
