@@ -13,7 +13,7 @@ export class Api {
   getProfile() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
-      headers: this._headers
+      // headers: this._headers
     })
       .then(this._checkResponse)
   }
@@ -21,7 +21,7 @@ export class Api {
   getCards() {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
-      headers: this._headers
+      // headers: this._headers
     })
       .then(this._checkResponse)
   }
@@ -29,7 +29,7 @@ export class Api {
   editProfile(name, about) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      headers: this._headers,
+      // headers: this._headers,
       body: JSON.stringify({
         name,
         about
@@ -41,7 +41,7 @@ export class Api {
   addCard(name, link) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
-      headers: this._headers,
+      // headers: this._headers,
       body: JSON.stringify({
         name,
         link
@@ -53,7 +53,7 @@ export class Api {
   deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: 'DELETE',
-      headers: this._headers
+      // headers: this._headers
     })
       .then(this._checkResponse)
   }
@@ -61,7 +61,7 @@ export class Api {
   addLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'PUT',
-      headers: this._headers
+      // headers: this._headers
     })
       .then(this._checkResponse)
   }
@@ -69,7 +69,7 @@ export class Api {
   deleteLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'DELETE',
-      headers: this._headers,
+      // headers: this._headers,
     })
       .then(this._checkResponse)
   }
@@ -77,7 +77,7 @@ export class Api {
   editAvatar(avatar) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this._headers,
+      // headers: this._headers,
       body: JSON.stringify({
         avatar
       })
@@ -87,9 +87,9 @@ export class Api {
 }
 
 export const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-39',
-  headers: {
-    authorization: '26f6c155-4854-4793-af04-7b9847248604',
-    'Content-Type': 'application/json'
-  }
+  baseUrl: 'http://msprod.nomoredomains.xyz',
+  // headers: {
+  //   authorization: '26f6c155-4854-4793-af04-7b9847248604',
+  //   'Content-Type': 'application/json'
+  // }
 });
